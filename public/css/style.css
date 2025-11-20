@@ -1,0 +1,483 @@
+/* === GLOBAL === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f5fcff;
+}
+
+/* === NAVBAR === */
+nav {
+    background-color: #00a0c6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 60px;
+}
+
+.nav-logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.login-btn {
+    background: white;
+    color: #004466;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* === HERO === */
+.hero {
+    background: url('../images/hero-bg.png') center center/cover no-repeat;
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    border-radius: 12px;
+    margin: 20px 40px;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* === TRIP SECTION === */
+.trips {
+    text-align: center;
+    margin: 50px auto;
+}
+
+.trips h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.trip-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* === CARD TRIP === */
+.trip-card {
+    background: #fff;
+    width: 540px;
+    border-radius: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    text-align: left;
+}
+
+.trip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Gambar */
+.trip-card img {
+    width: 230px;
+    height: 180px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* Label kuning */
+.label {
+    background: #FFD60A;
+    color: #000;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 8px 8px 8px 8px;
+    font-size: 14px;
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Info pojok kanan atas */
+.top-info {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.date-badge, .duration-badge {
+    background: #eef5ff;
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 13.5px;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Info text kanan */
+.trip-card .info {
+    flex: 1;
+}
+
+.info h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 6px 0;
+}
+
+.info p {
+    font-size: 14.5px;
+    margin: 3px 0;
+    color: #444;
+}
+
+/* Harga */
+.price {
+    position: absolute;
+    bottom: 22px; 
+    left: 271px;  
+    font-weight: 700;
+    color: #000;
+    font-size: 16px;
+}
+
+/* Tombol */
+.btn-detail {
+    background-color: #00bfff;
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 8px;
+    transition: background-color 0.3s ease;
+    float: right;
+}
+
+.btn-detail:hover {
+    background-color: #0099cc;
+}
+
+/* Responsive Trip */
+@media (max-width: 992px) {
+    .trip-card {
+        flex-direction: column;
+        width: 90%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .trip-card img {
+        width: 100%;
+        height: 220px;
+    }
+
+    .trip-card .info {
+        text-align: left;
+        width: 100%;
+    }
+}
+
+/* === REVIEW SECTION === */
+.review {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.review h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    
+}
+
+.review-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 25px 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.review-box img {
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.review-info {
+    text-align: left;
+}
+
+.review-info h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.review-info .stars {
+    color: #FFD700;
+    font-size: 18px;
+    margin: 6px 0;
+}
+
+.review-info small {
+    color: #555;
+    font-size: 14px;
+}
+
+.review-info p {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* === WHY SECTION === */
+.why {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.why h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.why-list {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.why-box {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 16px;
+    padding: 25px 40px;
+    width: 180px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.why-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.why-box i {
+    font-size: 48px;
+    color: #00b4ff;
+    margin-bottom: 10px;
+}
+
+.why-box p {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* === FOOTER === */
+footer {
+    background-color: #00b4ff;
+    color: #fff;
+    padding: 25px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-left img {
+    width: 55px;
+    height: 55px;
+}
+
+.footer-right i {
+    font-size: 22px;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footer-right i:hover {
+    color: #000;
+}
+
+footer small {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #eaf9ff;
+}
+
+/* === Gallery Section === */
+.gallery {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #f9fcff;
+}
+
+.gallery h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.gallery-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gallery-list img {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-list img:hover {
+    transform: scale(1.05);
+}
+
+.login-page, .register-page {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container, .register-container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 350px;
+}
+
+.login-logo {
+    width: 120px;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 2px solid #00b4d8;
+    border-radius: 6px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #0077b6;
+}
+
+.btn-login {
+    background: #00b4d8;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-login:hover {
+    background: #0096c7;
+}
+
+.small {
+    font-size: 13px;
+    margin-top: 8px;
+}
+.small a {
+    color: #0096c7;
+    text-decoration: none;
+}
+.small a:hover {
+    text-decoration: underline;
+}
