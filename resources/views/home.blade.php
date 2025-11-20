@@ -18,8 +18,8 @@
     <ul class="nav-links">
         <li><a href="{{ route('home') }}" class="active">Home</a></li>
         <a href="{{ route('trip') }}" class="text-gray-700 hover:text-blue-500">Trip</a>
-        <li><a href="#">Galeri</a></li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="{{ route('galeri') }}">Galeri</a></li>
+        <li><a href="{{ route('aboutus') }}">About Us</a></li>
     </ul>
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
