@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Lasica Trip Adventure</title>
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
         /* HERO */
         .about-hero {
             position: relative;
-            width: 100%;
+            width: 95%;
             height: 320px;
             overflow: hidden;
             border-radius: 20px;
-            margin: 100px auto 40px;
-            max-width: 95%;
+            margin: 20px auto 40px;
         }
         .about-hero-img {
             width: 100%;
@@ -60,8 +66,16 @@
             font-size: 17px;
             line-height: 1.7;
         }
+
+        .about-left p {
+        text-align: justify;
+        margin-bottom: 16px;
+        }
+
         .about-right img {
             width: 320px;
+            height: 300px;     /* atur tinggi untuk efek crop */
+            object-fit: cover;
             border-radius: 12px;
         }
 
@@ -89,6 +103,10 @@
             margin-bottom: 10px;
             font-size: 22px;
         }
+
+        .visimisi-card:first-child {
+            grid-column: 1 / -1;
+        }       
     </style>
 </head>
 <body>
@@ -108,14 +126,23 @@
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
         @auth
-            <img src="{{ asset('images/user.png') }}" class="user-icon" alt="User" style="width: 35px; border-radius: 50%;">
-            <form method="POST" action="{{ route('logout') }}">
+            <img src="{{ asset('images/user.png') }}" alt="User" class="user-icon"
+                 style="width: 35px; height: 35px; border-radius: 50%;">
+
+            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                 @csrf
-                <button type="submit" class="btn-logout" style="background:#e74c3c; color:white; padding:8px 16px; border:none; border-radius:5px; cursor:pointer;">Logout</button>
+                <button type="submit" class="btn-logout"
+                        style="background:#e74c3c; color:white; padding:8px 16px; border:none;
+                               border-radius:5px; cursor:pointer; font-size:14px; font-weight:500;">
+                    Logout
+                </button>
             </form>
         @endauth
+
         @guest
-            <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">Login</button>
+            <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">
+                Login
+            </button>
         @endguest
     </div>
 </nav>
@@ -137,8 +164,8 @@
 
     <div class="about-container">
         <div class="about-left">
-            <p>Lasica adalah platform digital yang dirancang untuk memfasilitasi hubungan antara pendaki pemula dan penyedia layanan open trip menjadi mudah dan efisien.</p>
-            <p>Konsep utama dari website ini adalah untuk menyediakan daftar katalog paket pendakian lengkap yang menampilkan lokasi, harga, fasilitas, jadwal, rating, dan informasi penting lainnya.</p>
+            <p>Lasica adalah platform digital yang dirancang untuk membuat hubungan antara pendaki potensial dan penyedia layanan open trip lebih mudah dan sistematis.</p>
+            <p>Konsep utama dari situs web ini adalah untuk menyediakan sistem informasi perjalanan pendakian yang lengkap, mulai dari katalog paket pendakian yang menampilkan tujuan, tanggal, fasilitas, harga, rating, dan foto pendukung untuk membantu pengguna memilih layanan yang mereka butuhkan. </p>
         </div>
 
         <div class="about-right">
@@ -153,14 +180,24 @@
     <h2 class="section-title">Visi & Misi</h2>
 
     <div class="visimisi-grid">
+
         <div class="visimisi-card">
             <h3>Visi</h3>
-            <p>Menjadi platform petualangan paling terpercaya dan menyenangkan di Indonesia.</p>
+            <p>Menjadi platform perjalanan petualangan paling terpercaya dan menyenangkan di Indonesia.</p>
         </div>
 
-        <div class="visimisi-card"><p>🌄 Menghadirkan pengalaman mendaki yang aman dan seru.</p></div>
-        <div class="visimisi-card"><p>🔥 Membantu pendaki menemukan pilihan terbaik, nyaman, dan terjangkau.</p></div>
-        <div class="visimisi-card"><p>🧭 Mendukung wisata berkelanjutan serta menjaga kelestarian alam.</p></div>
+        <div class="visimisi-card">
+            <p>🌄 Menghadirkan pengalaman mendaki yang aman dan seru.</p>
+        </div>
+
+        <div class="visimisi-card">
+            <p>🔥 Memberikan pelayanan cepat, nyaman, dan terjangkau.</p>
+        </div>
+
+        <div class="visimisi-card">
+            <p>🧭 Mendukung wisata berkelanjutan serta menjaga kelestarian alam.</p>
+        </div>
+
     </div>
 </section>
 
@@ -171,10 +208,12 @@
         <img src="{{ asset('images/logo.png') }}" alt="Logo">
         <div>
             <strong>Lasica Trip Adventure</strong><br>
-            Bogor, Jawa Barat, Indonesia
+            Bogor, Jawa Barat, ID
         </div>
     </div>
-    <div class="footer-right">🔗 Instagram | 🎵 TikTok | 💬 WhatsApp</div>
+    <div class="footer-right">
+        🔗 Instagram | 🎵 TikTok | 💬 WhatsApp
+    </div>
 </footer>
 
 </body>

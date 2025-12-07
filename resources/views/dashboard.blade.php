@@ -16,9 +16,9 @@
         </div>
 <ul class="nav-links">
     <li><a href="{{ route('home') }}" class="active">Home</a></li>
-    <li><a href="#">Trip</a></li>
-    <li><a href="#">Galeri</a></li>
-    <li><a href="#">About Us</a></li>
+    <li><a href="{{ route('trip') }}" class="active">Trip</a></li>
+    <li><a href="{{ route('galeri') }}" class="active">Galeri</a></li>
+    <li><a href="{{ route('aboutus') }}" class="active">About Us</a></li>
 </ul>
         @guest
     <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">Login</button>
