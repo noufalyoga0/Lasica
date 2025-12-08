@@ -6,66 +6,41 @@ use Illuminate\Http\Request;
 
 class TripController extends Controller
 {
-    // 🔹 Data Trip Dummy (sementara)
-    private $tripData = [
-        [
-            'id' => 1,
-            'title' => 'Gunung Sindoro 2024',
-            'duration' => '2H1M',
-            'price' => 1000000,
-            'image' => 'images/sindoro.jpg',
-            'rating' => 4.9,
-            'type' => 'Private Trip'
+    // DATA TANPA DATABASE
+    private $trips = [
+        1 => [
+            'title' => 'Trip Ke Pantai',
+            'price' => 'Rp 250.000',
+            'image' => '/images/pantai.jpg',
+            'description' => 'Trip seru ke pantai dengan pemandangan yang indah.',
         ],
-        [
-            'id' => 2,
-            'title' => 'Trip Gunung Merbabu 2024',
-            'duration' => '2H1M',
-            'price' => 950000,
-            'image' => 'images/merbabu.jpg',
-            'rating' => 4.8,
-            'type' => 'Private Trip'
+        2 => [
+            'title' => 'Trip Ke Gunung',
+            'price' => 'Rp 300.000',
+            'image' => '/images/gunung.jpg',
+            'description' => 'Pendakian dengan guide profesional.',
         ],
-        [
-            'id' => 3,
-            'title' => 'Trip Gunung Prau 2024',
-            'duration' => '2H1M',
-            'price' => 850000,
-            'image' => 'images/prau.jpg',
-            'rating' => 4.9,
-            'type' => 'Private Trip'
+        3 => [
+            'title' => 'Trip Ke Air Terjun',
+            'price' => 'Rp 200.000',
+            'image' => '/images/airterjun.jpg',
+            'description' => 'Nikmati keindahan air terjun yang eksotis.',
         ],
     ];
 
-    /**
-     * 🔸 Halaman list trip
-     */
     public function index()
     {
-        // Convert array ke object biar enak dipakai di blade
-        $trips = collect($this->tripData)->map(function ($t) {
-            return (object) $t;
-        });
-
-        return view('trip', compact('trips'));
+        $trips = $this->trips;
+        return view('home', compact('trips'));
     }
 
-    /**
-     * 🔸 Halaman detail trip
-     */
     public function detail($id)
     {
-        // Cari trip berdasarkan ID
-        $trip = collect($this->tripData)->firstWhere('id', $id);
-
-        // Jika tidak ditemukan → 404
-        if (!$trip) {
-            abort(404, "Trip tidak ditemukan.");
+        if (!isset($this->trips[$id])) {
+            abort(404);
         }
 
-        // Convert ke object
-        $trip = (object) $trip;
-
-        return view('trip-detail', compact('trip'));
+        $trip = $this->trips[$id];
+        return view('detail', compact('trip'));
     }
 }

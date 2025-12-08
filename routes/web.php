@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Trip list
     Route::get('/trip', [TripController::class, 'index'])->name('trip');
 
-    // 🟩🟩 INI WAJIB ADA (route detail)
+    // (route detail)
     Route::get('/trip/{id}', [TripController::class, 'detail'])->name('trip.detail');
 
     // Profil user
@@ -40,6 +40,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/aboutus', function () {
     return view('aboutus');
     })->name('aboutus');
+
+
+Route::get('/', [TripController::class, 'index'])->name('home');
+Route::get('/trip/{id}', [TripController::class, 'detail'])->name('trip.detail');
 
 });
 

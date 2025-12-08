@@ -17,7 +17,7 @@
 
     <ul class="nav-links">
         <li><a href="{{ route('home') }}" class="active">Home</a></li>
-        <a href="{{ route('trip') }}" class="text-gray-700 hover:text-blue-500">Trip</a>
+        <li><a href="{{ route('trip') }}" class="active">Trip</a></li>
         <li><a href="{{ route('galeri') }}">Galeri</a></li>
         <li><a href="{{ route('aboutus') }}">About Us</a></li>
     </ul>
@@ -88,7 +88,7 @@
                     <p>🔥 1rb x dipesan</p>
                     <p>👁️ 2rb x dilihat</p>
                     <p class="price">Rp 600.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
+                    <a href="{{ route('trip.detail', 1) }}" class="btn-detail">Detail ></a>
                 </div>
             </div>
 
