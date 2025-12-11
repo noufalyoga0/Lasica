@@ -44,6 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     return view('aboutus');
     })->name('aboutus');
 
+    Route::get('/testimoni/tambah', [App\Http\Controllers\TestimoniController::class, 'create']) ->name('testimoni.create');
+    Route::post('/testimoni/store', [App\Http\Controllers\TestimoniController::class, 'store'])->name('testimoni.store');
 
 Route::get('/', [TripController::class, 'index'])->name('home');
 Route::get('/trip/{id}', [TripController::class, 'detail'])->name('trip.detail');
