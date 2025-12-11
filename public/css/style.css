@@ -243,6 +243,8 @@ nav {
     padding: 10px 0;
 }
 
+
+
 .review h2 {
     font-size: 26px;
     font-weight: 700;
@@ -711,3 +713,28 @@ input:focus {
     
 
 
+.add-btn-wrapper {
+    display: flex;
+    justify-content:center;
+    margin-top: 10px;
+    margin-bottom : 10px;
+}
+
+.add-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s ease;
+}
+
+.add-btn:hover {
+    background: #2980b9;
+}
