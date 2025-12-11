@@ -3,14 +3,15 @@
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 
 //
 // 🌿 Halaman publik
 //
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('landing');
+})->name('dashboard');
 
 //
 // 🔐 Halaman setelah login
@@ -36,6 +37,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Galeri
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
 
+    Route::get('/testimoni', [TestimoniController::class, 'index']) ->name('testimoni');
+
     //Aboutus
     Route::get('/aboutus', function () {
     return view('aboutus');
@@ -44,6 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/', [TripController::class, 'index'])->name('home');
 Route::get('/trip/{id}', [TripController::class, 'detail'])->name('trip.detail');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 });
 

@@ -19,6 +19,7 @@
         <li><a href="{{ route('home') }}" class="active">Home</a></li>
         <li><a href="{{ route('trip') }}" class="active">Trip</a></li>
         <li><a href="{{ route('galeri') }}">Galeri</a></li>
+        <li><a href="{{ route('testimoni') }}" class="active">Testimoni</a></li>
         <li><a href="{{ route('aboutus') }}">About Us</a></li>
     </ul>
 
