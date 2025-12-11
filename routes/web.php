@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 //
-// 🌿 Halaman publik
+// 🌿 Halaman publik (tanpa login)
 //
 Route::get('/', function () {
     return view('dashboard');
@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Trip list
     Route::get('/trip', [TripController::class, 'index'])->name('trip');
 
-    // (route detail)
+    // Trip detail
     Route::get('/trip/{id}', [TripController::class, 'detail'])->name('trip.detail');
 
     // Profil user
@@ -33,18 +33,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //Galeri
+    // Galeri
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
 
-    //Aboutus
+    // About us
     Route::get('/aboutus', function () {
-    return view('aboutus');
+        return view('aboutus');
     })->name('aboutus');
-
-
-Route::get('/', [TripController::class, 'index'])->name('home');
-Route::get('/trip/{id}', [TripController::class, 'detail'])->name('trip.detail');
-
 });
+
+// ❗ Jangan buat route '/' lagi di sini
 
 require __DIR__.'/auth.php';
