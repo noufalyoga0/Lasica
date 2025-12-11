@@ -16,10 +16,10 @@
     </div>
 
     <ul class="nav-links">
-        <li><a href="{{ route('home') }}">Home</a></li>
-        <li><a href="{{ route('trip') }}" class="active">Trip</a></li>
-        <li><a href="{{ route('galeri') }}">Galeri</a></li>
-        <li><a href="{{ route('aboutus') }}">About Us</a></li>
+        <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('trip') }}" class="active">Trip</a>
+        <a href="{{ route('galeri') }}">Galeri</a>
+        <a href="{{ route('aboutus') }}">About Us</a>
     </ul>
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">

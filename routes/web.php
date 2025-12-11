@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Route;
 //
 // 🌿 Halaman publik (tanpa login)
 //
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('landing');
 
 //
 // 🔐 Halaman setelah login
@@ -43,6 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('aboutus');
 });
 
-// Jangan buat route '/' lagi di sini
+    //Testimoni
+    Route::get('/testimoni', [TestimoniController::class, 'index']) ->name('testimoni');
+// ❗ Jangan buat route '/' lagi di sini
 
 require __DIR__.'/auth.php';
