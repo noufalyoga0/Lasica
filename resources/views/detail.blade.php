@@ -271,18 +271,40 @@
 
 
     <!-- HEADER -->
-    <header>
-        <div class="logo">🌄 Lasica Trip</div>
+    <nav>
+    <div class="nav-logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Lasica Logo">
+    </div>
 
-        <nav>
-            <a href="{{ route('home') }}">Home</a>
-            <a href="#">Trip</a>
-            <a href="#">Galeri</a>
-            <a href="#">About Us</a>
-        </nav>
+    <ul class="nav-links">
+        <li><a href="{{ route('home') }}">Home</a></li>
+        <li><a href="{{ route('trip') }}">Trip</a></li>
+        <li><a href="{{ route('galeri') }}">Galeri</a></li>
+        <li><a href="{{ route('aboutus') }}" class="active">About Us</a></li>
+    </ul>
 
-        <div class="profile-icon"></div>
-    </header>
+    <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+        @auth
+            <img src="{{ asset('images/user.png') }}" alt="User" class="user-icon"
+                 style="width: 35px; height: 35px; border-radius: 50%;">
+
+            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn-logout"
+                        style="background:#e74c3c; color:white; padding:8px 16px; border:none;
+                               border-radius:5px; cursor:pointer; font-size:14px; font-weight:500;">
+                    Logout
+                </button>
+            </form>
+        @endauth
+
+        @guest
+            <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">
+                Login
+            </button>
+        @endguest
+    </div>
+</nav>
 
     <!-- IMAGE SECTION -->
     <div class="image-section">

@@ -3,14 +3,15 @@
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 
 //
 // 🌿 Halaman publik (tanpa login)
 //
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('landing');
+})->name('dashboard');
 
 //
 // 🔐 Halaman setelah login
@@ -42,6 +43,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('aboutus');
 });
 
-// ❗ Jangan buat route '/' lagi di sini
+// Jangan buat route '/' lagi di sini
 
 require __DIR__.'/auth.php';
