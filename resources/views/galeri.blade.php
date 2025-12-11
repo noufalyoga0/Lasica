@@ -10,7 +10,7 @@
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .gallery-container {
@@ -62,6 +62,7 @@
         <li><a href="{{ route('home') }}">Home</a></li>
         <li><a href="{{ route('trip') }}">Trip</a></li>
         <li><a href="{{ route('galeri') }}" class="active">Galeri</a></li>
+        <li><a href="{{ route('testimoni') }}" class="active">Testimoni</a></li>
         <li><a href="{{ route('aboutus') }}">About Us</a></li>
     </ul>
 
