@@ -108,20 +108,16 @@
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
 
         @auth
-            <img src="{{ asset('images/user.png') }}" 
-                 alt="User" 
-                 class="user-icon"
-                 style="width: 35px; height: 35px; border-radius: 50%;">
-
-            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn-logout"
-                        style="background:#e74c3c; color:white; padding:8px 16px; border:none;
-                               border-radius:5px; cursor:pointer; font-size:14px; font-weight:500;">
-                    Logout
-                </button>
-            </form>
-        @endauth
+    <a href="{{ route('profile') }}">
+        <img
+            src="{{ Str::startsWith(auth()->user()->avatar, 'http')
+                ? auth()->user()->avatar
+                : asset('storage/' . auth()->user()->avatar) }}"
+            class="user-icon"
+            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
+        >
+    </a>
+@endauth
 
         @guest
             <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">
@@ -135,54 +131,47 @@
 <div class="review-wrapper">
 
     <h2>Ulasan</h2>
+{{-- === DATA DINAMIS DARI DATABASE === --}}
+@php $hasData = false; @endphp
 
-    <!-- CARD 1 -->
+@foreach($reviews as $review)
+    @php $hasData = true; @endphp
     <div class="review-card">
-        <img src="{{ asset('images/sample.png') }}" alt="Foto User">
-        <div class="review-content">
-            <div class="review-name">Anisa Rahmawati</div>
-            <div class="review-rating">★★★★★</div>
-            <div class="review-date">17 Mei 2024</div>
-            <div class="review-text">Tripnya sangat mantap sekali, saya puas!!!</div>
-        </div>
-        <button class="delete-btn">Hapus</button>
+        <img
+    src="{{ Str::startsWith($review->user->avatar, 'http')
+        ? $review->user->avatar
+        : asset('storage/' . $review->user->avatar) }}"
+    alt="Foto User"
+>
+
+<div class="review-content">
+    <div class="review-name">
+        {{ $review->user->username }}
     </div>
 
-    <!-- CARD 2 -->
-    <div class="review-card">
-        <img src="{{ asset('images/sample.png') }}" alt="Foto User">
-        <div class="review-content">
-            <div class="review-name">Anisa Rahmawati</div>
-            <div class="review-rating">★★★★★</div>
-            <div class="review-date">17 Mei 2024</div>
-            <div class="review-text">Tripnya sangat mantap sekali, saya puas!!!</div>
-        </div>
-        <button class="delete-btn">Hapus</button>
-    </div>
 
-    <!-- CARD 3 -->
-    <div class="review-card">
-        <img src="{{ asset('images/sample.png') }}" alt="Foto User">
-        <div class="review-content">
-            <div class="review-name">Anisa Rahmawati</div>
-            <div class="review-rating">★★★★★</div>
-            <div class="review-date">17 Mei 2024</div>
-            <div class="review-text">Tripnya sangat mantap sekali, saya puas!!!</div>
-        </div>
-        <button class="delete-btn">Hapus</button>
-    </div>
+            <div class="review-rating">
+                {{ str_repeat('★', $review->rating) }}
+            </div>
 
-    <!-- CARD 4 -->
-    <div class="review-card">
-        <img src="{{ asset('images/sample.png') }}" alt="Foto User">
-        <div class="review-content">
-            <div class="review-name">Anisa Rahmawati</div>
-            <div class="review-rating">★★★★★</div>
-            <div class="review-date">17 Mei 2024</div>
-            <div class="review-text">Tripnya sangat mantap sekali, saya puas!!!</div>
+            <div class="review-date">
+                {{ $review->created_at->format('d M Y') }}
+            </div>
+
+            <div class="review-text">
+                {{ $review->ulasan }}
+            </div>
         </div>
-        <button class="delete-btn">Hapus</button>
     </div>
+@endforeach
+
+@if(!$hasData)
+    <p style="text-align:center; color:gray;">
+        Belum ada ulasan.
+    </p>
+@endif
+{{-- === END DATA DINAMIS === --}}
+
 </div>
 
 <!-- TOMBOL TAMBAH -->
@@ -193,7 +182,7 @@
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
-        Tambah
+        Tambah Ulasan
     </a>
 </div>
 

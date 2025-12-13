@@ -19,6 +19,7 @@ nav {
     padding: 10px 60px;
 }
 
+
 .nav-logo img {
     width: 50px;
     height: 50px;
@@ -511,18 +512,11 @@ input:focus {
 .filter-btn.active {
     background: #00b4d8;
     color: white;
+}
+
+    
 
 
-        
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
-
-        body {
-            background: #eefaff;
-        }
 
         /* ===== SEMUA CSS NAVBAR LAMA DIHAPUS ===== */
 
@@ -737,4 +731,171 @@ input:focus {
 
 .add-btn:hover {
     background: #2980b9;
+}
+
+/* === PROFILE PAGE === */
+
+.profile-greeting {
+    width: fit-content;
+    margin: 25px auto;
+    padding: 8px 25px;
+    border: 2px solid #00b4ff;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #004466;
+}
+
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.profile-card {
+    background: white;
+    width: 650px;
+    border: 2px solid #00b4ff;
+    border-radius: 10px;
+    padding: 25px 35px;
+}
+
+.profile-card h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.profile-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.upload-btn {
+    background: #00b4ff;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.profile-form label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 12px;
+    display: block;
+}
+
+.profile-form input {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.btn-save {
+    background: #00b4ff;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.add-btn {
+    text-decoration: none;
+}
+
+.profile-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Tombol utama */
+.btn-save {
+    width: 100%;
+    max-width: 260px;
+    background: #4e73df;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    background: #3b5bd6;
+}
+
+/* Logout */
+.logout-form {
+    width: 100%;
+    max-width: 260px;
+}
+
+.btn-logout {
+    width: 100%;
+    background: transparent;
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-save,
+.btn-logout {
+    width: 220px;        /* ukuran sama */
+    height: 44px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+/* SIMPAN */
+.btn-save {
+    background: #3498db;
+    color: white;
+}
+
+/* LOGOUT */
+.btn-logout {
+    background: #e74c3c;
+    color: white;
+}
+
+/* Hover effect */
+.btn-save:hover {
+    background: #2980b9;
+}
+
+.btn-logout:hover {
+    background: #c0392b;
 }

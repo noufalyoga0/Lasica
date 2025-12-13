@@ -6,45 +6,64 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 
-//
-// 🌿 Halaman publik (tanpa login)
-//
+/*
+|--------------------------------------------------------------------------
+| Halaman Publik
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', function () {
     return view('dashboard');
 })->name('landing');
 
-//
-// 🔐 Halaman setelah login
-//
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Testimoni (PUBLIK)
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/testimoni', [TestimoniController::class, 'index'])
+    ->name('testimoni');
+    
+Route::get('/testimoni/create', [TestimoniController::class, 'create'])
+    ->name('testimoni.create');
+
+Route::post('/testimoni', [TestimoniController::class, 'store'])
+    ->name('testimoni.store');
+
+/*
+|--------------------------------------------------------------------------
+| Halaman Setelah Login
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    // Home
     Route::get('/home', function () {
         return view('home');
     })->name('home');
 
-    // Trip list
     Route::get('/trip', [TripController::class, 'index'])->name('trip');
-
-    // Trip detail
     Route::get('/trip/{id}', [TripController::class, 'detail'])->name('trip.detail');
 
-    // Profil user
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Galeri
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
 
-    // About us
     Route::get('/aboutus', function () {
         return view('aboutus');
     })->name('aboutus');
-});
 
-    //Testimoni
-    Route::get('/testimoni', [TestimoniController::class, 'index']) ->name('testimoni');
-// ❗ Jangan buat route '/' lagi di sini
+    Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profil.update');
+    });
+});
 
 require __DIR__.'/auth.php';

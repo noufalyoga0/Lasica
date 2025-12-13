@@ -17,28 +17,25 @@
 
     <ul class="nav-links">
         <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('trip') }}" class="active">Trip</a>
+        <a href="{{ route('trip') }}" >Trip</a>
         <a href="{{ route('galeri') }}">Galeri</a>
+        <a href="{{ route('testimoni') }}">Testimoni</a>
         <a href="{{ route('aboutus') }}">About Us</a>
     </ul>
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
 
         @auth
-            <img src="{{ asset('images/user.png') }}" 
-                 alt="User" 
-                 class="user-icon"
-                 style="width: 35px; height: 35px; border-radius: 50%;">
-
-            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn-logout"
-                        style="background:#e74c3c; color:white; padding:8px 16px; border:none;
-                               border-radius:5px; cursor:pointer; font-size:14px; font-weight:500;">
-                    Logout
-                </button>
-            </form>
-        @endauth
+    <a href="{{ route('profile') }}">
+        <img
+            src="{{ Str::startsWith(auth()->user()->avatar, 'http')
+                ? auth()->user()->avatar
+                : asset('storage/' . auth()->user()->avatar) }}"
+            class="user-icon"
+            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
+        >
+    </a>
+@endauth
 
         @guest
             <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">

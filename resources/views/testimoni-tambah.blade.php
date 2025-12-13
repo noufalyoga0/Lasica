@@ -3,97 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimoni - Lasica Trip Adventure</title>
+    <title>Tambah Testimoni - Lasica Trip Adventure</title>
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="ttps://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* ====== CONTAINER UTAMA ====== */
-        .review-wrapper {
+        .form-wrapper {
             width: 90%;
-            max-width: 1100px;
+            max-width: 700px;
             margin: 40px auto;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 30px 35px;
+            border-radius: 18px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .review-wrapper h2 {
+        .form-wrapper h2 {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             font-size: 22px;
+            font-weight: 700;
         }
 
-    </style>
+        .form-wrapper p {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 25px;
+        }
 
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 2px solid #d0ecf9;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 110px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #00b4ff;
+        }
+
+        /* === STAR RATING === */
+        .stars {
+            display: flex;
+            gap: 6px;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .stars span {
+            color: #ccc;
+            transition: 0.2s;
+        }
+
+        .stars span.active {
+            color: #f1c40f;
+        }
+
+        /* === BUTTON === */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .btn-cancel {
+            background: #bdc3c7;
+            color: #333;
+            padding: 10px 26px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-submit {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background: #2980b9;
+        }
+    </style>
 </head>
 <body>
 
-<!-- NAVBAR (SAMA DENGAN HOME & TRIP) -->
-<nav>
-    <div class="nav-logo">
-        <img src="{{ asset('images/logo.png') }}" alt="Lasica Logo">
-    </div>
 
-    <ul class="nav-links">
-        <li><a href="{{ route('home') }}">Home</a></li>
-        <li><a href="{{ route('trip') }}">Trip</a></li>
-        <li><a href="{{ route('galeri') }}" class="active">Galeri</a></li>
-        <li><a href="{{ route('testimoni') }}" class="active">Testimoni</a></li>
-        <li><a href="{{ route('aboutus') }}">About Us</a></li>
-    </ul>
 
-    <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+<div class="form-wrapper">
+    <h2>Tambah Ulasan</h2>
+    <p>Bagikan pengalaman perjalananmu bersama Lasica Trip Adventure</p>
 
-        @auth
-            <img src="{{ asset('images/user.png') }}" 
-                 alt="User" 
-                 class="user-icon"
-                 style="width: 35px; height: 35px; border-radius: 50%;">
+    <form action="{{ route('testimoni.store') }}" method="POST">
+        @csrf
 
-            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn-logout"
-                        style="background:#e74c3c; color:white; padding:8px 16px; border:none;
-                               border-radius:5px; cursor:pointer; font-size:14px; font-weight:500;">
-                    Logout
-                </button>
-            </form>
-        @endauth
+        <!-- NAMA -->
+        <div class="form-group">
+            <label>Nama</label>
+            <input type="text" value="{{ auth()->user()->name }}"readonly>
+        </div>
 
-        @guest
-            <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">
-                Login
-            </button>
-        @endguest
+        <!-- RATING -->
+        <div class="form-group">
+            <label>Rating</label>
+            <div class="stars" id="starRating">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+            </div>
+            <input type="hidden" name="rating" id="rating">
+        </div>
 
-    </div>
-</nav>
+        <!-- ULASAN -->
+        <div class="form-group">
+            <label>Ulasan</label>
+            <textarea name="ulasan" placeholder="Tulis pengalaman trip kamu..." required></textarea>
+        </div>
 
-<div class="review-wrapper">
-
-    <h2>Ulasan</h2>
-
-    
+        <div class="form-actions">
+            <a href="{{ route('testimoni') }}" class="btn-cancel">Batal</a>
+            <button type="submit" class="btn-submit">Kirim Ulasan</button>
+        </div>
+    </form>
 </div>
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-left">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo">
-        <div>
-            <strong>Lasica Trip Adventure</strong><br>
-            Bogor, Jawa Barat, ID
-        </div>
-    </div>
-    <div class="footer-right">
-        🔗 Instagram | 🎵 TikTok | 💬 WhatsApp
-    </div>
-</footer>
+
+
+<script>
+    const stars = document.querySelectorAll('#starRating span');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            let value = star.getAttribute('data-value');
+            ratingInput.value = value;
+
+            stars.forEach(s => s.classList.remove('active'));
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.add('active');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

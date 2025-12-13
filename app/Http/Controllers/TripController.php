@@ -31,7 +31,7 @@ class TripController extends Controller
     public function index()
     {
         $trips = $this->trips;
-        return view('home', compact('trips'));
+        return view('trip', compact('trips'));
     }
 
     public function detail($id)

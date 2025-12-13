@@ -5,54 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Lasica Trip Adventure</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Navbar -->
+<!-- NAVBAR (COPY DARI HOME) -->
 <nav>
     <div class="nav-logo">
         <img src="{{ asset('images/logo.png') }}" alt="Lasica Logo">
     </div>
 
     <ul class="nav-links">
-        <a href="{{ route('home') }}" class="active">Home</a>
-        <a href="{{ route('trip') }}" class="active">Trip</a>
+        <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('trip') }}" >Trip</a>
         <a href="{{ route('galeri') }}">Galeri</a>
-        <a href="{{ route('testimoni') }}" class="active">Testimoni</a>
+        <a href="{{ route('testimoni') }}">Testimoni</a>
         <a href="{{ route('aboutus') }}">About Us</a>
     </ul>
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
 
-        @auth
-            <!-- User Icon -->
-            <img src="{{ asset('images/user.png') }}" 
-                 alt="User" 
-                 class="user-icon"
-                 style="width: 35px; height: 35px; border-radius: 50%;">
+       @auth
+    <a href="{{ route('profile') }}">
+        <img
+            src="{{ Str::startsWith(auth()->user()->avatar, 'http')
+                ? auth()->user()->avatar
+                : asset('storage/' . auth()->user()->avatar) }}"
+            class="user-icon"
+            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
+        >
+    </a>
+@endauth
 
-
-            <!-- Logout Button -->
-            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit" 
-                        class="btn-logout"
-                        style="
-                            background:#e74c3c; 
-                            color:white; 
-                            padding:8px 16px; 
-                            border:none; 
-                            border-radius:5px; 
-                            cursor:pointer;
-                            font-family: 'Poppins', sans-serif;
-                            font-size: 14px;
-                            font-weight: 500;
-                        ">
-                    Logout
-                </button>
-            </form>
-        @endauth
 
         @guest
             <button class="login-btn" onclick="window.location.href='{{ route('login') }}'">
