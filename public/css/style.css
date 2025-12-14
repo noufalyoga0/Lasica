@@ -899,3 +899,53 @@ input:focus {
 .btn-logout:hover {
     background: #c0392b;
 }
+
+
+/* === TRIP PAGE === */
+.trip-page {
+    background-color: #f5fcff;;
+}
+
+.trip-page .container {
+    width: 600px;
+    background: #fff;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.trip-page h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.trip-page .form-group {
+    margin-bottom: 15px;
+}
+
+.trip-page label {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.trip-page input,
+.trip-page textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;   /* INI BARU KEPAKE */
+    border-radius: 4px;
+}
+
+.trip-page textarea {
+    height: 120px;
+}
+
+.trip-page button {
+    background-color: #1aa3c8;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 4px;
+}
+
+

@@ -64,6 +64,31 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profil.update');
     });
+
+
+    Route::get('/dashboard-admin', function () {
+        return view('dashboard-admin');
+    })->name('dashboard-admin');
+
+    Route::get('/trip-admin', function () {
+        return view('trip-admin');
+    })->name('trip-admin');
+
+    Route::get('admin-transactions', function () {
+        return view('admin-transactions');
+    })->name('admin-transactions');
+
+    Route::get('/admin-accounts', function () {
+        return view('admin-accounts');
+    })->name('admin-accounts');
+
+    Route::get('/admin-settings', function () {
+        return view('admin-settings');
+    })->name('admin-settings');
+
+    Route::get('/createtrip-admin', function () {
+    return view('/createtrip-admin');
+    })->name('createtrip-admin');
 });
 
 require __DIR__.'/auth.php';
