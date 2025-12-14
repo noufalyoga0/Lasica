@@ -101,24 +101,65 @@
     </div>
 </div>
 
-{{-- ================= HARGA ================= --}}
-<div class="package-box">
-    <h2 class="pkg-title">
-        Harga Paket
-        (Rp {{ number_format($trip->harga, 0, ',', '.') }})
-    </h2>
 
-    <p style="margin-top:10px;color:#555;">
-        {{ $trip->deskripsi ?? 'Detail paket akan diinformasikan oleh admin.' }}
-    </p>
+{{-- ===================== --}}
+{{-- PAKET PERJALANAN --}}
+{{-- ===================== --}}
+
+<div class="package-box">
+    <h2 class="pkg-title">Paket A (600.000)</h2>
+    <div class="pkg-lists">
+        <ul>
+            <li>Transportasi PP</li>
+            <li>Simaksi</li>
+            <li>Asuransi</li>
+        </ul>
+    </div>
 </div>
+
+<div class="package-box">
+    <h2 class="pkg-title">Paket B (920.000)</h2>
+    <div class="pkg-lists">
+        <ul>
+            <li>Transport PP</li>
+            <li>Simaksi</li>
+            <li>Asuransi</li>
+            <li>Guide</li>
+            <li>Porter Tenda</li>
+            <li>Porter Makan</li>
+            <li>Tenda</li>
+            <li>Kompor & Peralatan</li>
+        </ul>
+
+        <ul>
+            <li>Rumah Singgah</li>
+            <li>Makan sebelum pendakian</li>
+            <li>Makan selama pendakian 4x</li>
+            <li>Logistik</li>
+            <li>P3K</li>
+            <li>HT</li>
+            <li>Alat Sholat</li>
+            <li>E-Sertifikat</li>
+        </ul>
+    </div>
+</div>
+
+<div class="package-box">
+    <h2 class="pkg-title">Harga Tidak Termasuk:</h2>
+    <ul class="not-included">
+        <li>Porter pribadi</li>
+        <li>Perlengkapan pribadi</li>
+        <li>Cemilan & air pribadi</li>
+    </ul>
+</div>
+
 
 {{-- ================= BOOK ================= --}}
 <div class="btn-wrapper">
     @auth
-        <a href="{{ route('payment.create', $trip->id) }}" class="btn">
-            Book Now
-        </a>
+        <a href="{{ route('order.create', $trip->id) }}" class="btn">
+    Book Now
+</a>
     @endauth
 
     @guest

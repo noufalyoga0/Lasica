@@ -26,16 +26,18 @@
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
 
        @auth
-    <a href="{{ route('profile') }}">
-        <img
-            src="{{ Str::startsWith(auth()->user()->avatar, 'http')
+<a href="{{ route('profile') }}" class="nav-avatar">
+    <img
+        src="{{ auth()->user()->avatar
+            ? (Str::startsWith(auth()->user()->avatar, 'http')
                 ? auth()->user()->avatar
-                : asset('storage/' . auth()->user()->avatar) }}"
-            class="user-icon"
-            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
-        >
-    </a>
+                : asset('storage/' . auth()->user()->avatar))
+            : asset('images/default-avatar.png') }}"
+        alt="Profile"
+    >
+</a>
 @endauth
+
 
 
         @guest
@@ -59,127 +61,113 @@
 
     <!-- Trip Tersedia -->
     <section class="trips">
-        <h2>Trip Yang Tersedia</h2>
-        <div class="trip-list">
-            <div class="trip-card">
-                <img src="{{ asset('images/sindoro.png') }}" alt="Gunung Sindoro">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Okt 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Sindoro 2D1N</h3>
-                    <p>⭐ 5 (1.022 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 1rb x dipesan</p>
-                    <p>👁️ 2rb x dilihat</p>
-                    <p class="price">Rp 600.000</p>
-                    <a href="{{ route('trip.detail', 1) }}" class="btn-detail">Detail ></a>
-                </div>
-            </div>
+    <h2>Trip Tersedia</h2>
 
-            <div class="trip-card">
-                <img src="{{ asset('images/lawu.png') }}" alt="Gunung Lawu">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Okt 2025</div>
-                    <div class="duration-badge">⏱️ 1 Hari</div>
-                    <h3>Tektok Gunung Lawu</h3>
-                    <p>⭐ 5 (2.100 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 2rb x dipesan</p>
-                    <p>👁️ 4rb x dilihat</p>
-                    <p class="price">Rp 250.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
-                </div>
-            </div>
+    <div class="trip-list">
+        @foreach($trips as $trip)
+<div class="trip-card">
+
+    <img src="{{ asset('storage/' . $trip->image) }}" alt="{{ $trip->nama_trip }}">
+
+    {{-- LABEL --}}
+    <span class="label">
+        {{ $trip->tipe_trip === 'private' ? 'Private Trip' : 'Open Trip' }}
+    </span>
+
+    <div class="info">
+        <div class="date-badge">
+            📅 {{ \Carbon\Carbon::parse($trip->tanggal)->translatedFormat('d M Y') }}
         </div>
-    </section>
 
-    <!-- Sering Dipesan -->
-    <section class="trips">
-        <h2>Sering Dipesan</h2>
-        <div class="trip-list">
-            <div class="trip-card">
-                <img src="{{ asset('images/merbabu.png') }}" alt="Gunung Merbabu">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Okt 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Merbabu</h3>
-                    <p>⭐ 5 (5.341 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 5rb x dipesan</p>
-                    <p>👁️ 7rb x dilihat</p>
-                    <p class="price">Rp 600.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
-                </div>
-            </div>
-
-            <div class="trip-card">
-                <img src="{{ asset('images/sindoro2.png') }}" alt="Gunung Sindoro 2">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Okt 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Sindoro 2D1N</h3>
-                    <p>⭐ 5 (1.022 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 1rb x dipesan</p>
-                    <p>👁️ 2rb x dilihat</p>
-                    <p class="price">Rp 600.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
-                </div>
-            </div>
+        <div class="duration-badge">
+            ⏱ {{ $trip->durasi_hari }} Hari
         </div>
-    </section>
 
-    <!-- Jadwal Trip Terdekat -->
-    <section class="trips">
-        <h2>Jadwal Trip Terdekat</h2>
-        <div class="trip-list">
-            <div class="trip-card">
-                <img src="{{ asset('images/prau.png') }}" alt="Gunung Prau">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Okt 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Prau 2D1N</h3>
-                    <p>⭐ 5 (1.000 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 1rb x dipesan</p>
-                    <p>👁️ 2rb x dilihat</p>
-                    <p class="price">Rp 500.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
-                </div>
-            </div>
+        <h3>{{ $trip->nama_trip }}</h3>
 
-            <div class="trip-card">
-                <img src="{{ asset('images/sumbing.jpg') }}" alt="Gunung Sumbing">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 9 Okt 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Sumbing</h3>
-                    <p>⭐ 5 (900 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 1rb x dipesan</p>
-                    <p>👁️ 1.5rb x dilihat</p>
-                    <p class="price">Rp 550.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
-                </div>
-            </div>
-        </div>
-    </section>
+        <p>📍 {{ $trip->lokasi }}</p>
+
+        {{-- ================= OPEN TRIP ================= --}}
+        @if($trip->tipe_trip === 'open')
+            <p>
+                ⭐ {{ number_format($trip->rating, 1) }}
+                ({{ number_format($trip->total_ulasan) }} Ulasan)
+            </p>
+
+            <p>🔥 {{ $trip->total_dipesan }}x dipesan</p>
+            <p>👁 {{ $trip->views }}x dilihat</p>
+
+            <p class="price">
+                Rp {{ number_format($trip->harga, 0, ',', '.') }}
+            </p>
+
+            <a href="{{ route('trip.detail', $trip->id) }}" class="btn-detail">
+                Detail >
+            </a>
+        @endif
+
+        {{-- ================= PRIVATE TRIP ================= --}}
+        @if($trip->tipe_trip === 'private')
+            <p class="trip-desc">
+                <strong>Min. pemesanan {{ $trip->min_pax }} pax</strong><br>
+                Hubungi admin untuk pemesanan private trip.
+            </p>
+
+            <p class="price">
+                Rp {{ number_format($trip->harga, 0, ',', '.') }}/pax
+            </p>
+
+            <a href="https://wa.me/6285731500985" class="btn-detail">
+                Pesan
+            </a>
+        @endif
+    </div>
+</div>
+@endforeach
+
+    </div>
+</section>
+
+@if($seringDipesan->count())
+<section class="trips">
+    <h2>Sering Dipesan</h2>
+
+    <div class="trip-list">
+        @foreach($seringDipesan as $trip)
+            @include('components.trip-card', ['trip' => $trip])
+        @endforeach
+    </div>
+</section>
+@endif
+
+
+<section class="trips">
+    <h2>Jadwal Trip Terdekat</h2>
+
+    <div class="trip-list">
+        @foreach($jadwalTerdekat as $trip)
+            @include('components.trip-card', ['trip' => $trip])
+        @endforeach
+    </div>
+</section>
+
+
 
     <!-- Gallery -->
     <section class="gallery">
         <h2>Gallery</h2>
-        <div class="gallery-list">
-            <img src="{{ asset('images/gallery1.png') }}" alt="Gallery 1">
-            <img src="{{ asset('images/gallery2.png') }}" alt="Gallery 2">
-            <img src="{{ asset('images/gallery3.png') }}" alt="Gallery 3">
+        <div class="gallery-grid">
+    @foreach ($galeris as $galeri)
+        <div class="gallery-item">
+            <img
+                src="{{ asset('storage/' . $galeri->image) }}"
+                alt="{{ $galeri->title }}"
+            >
         </div>
-    </section>
+    @endforeach
+</div>
+
+</section>
 
     <!-- Footer -->
     <footer>

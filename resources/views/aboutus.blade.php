@@ -126,16 +126,18 @@
     </ul>
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
-        @auth
-    <a href="{{ route('profile') }}">
-        <img
-            src="{{ Str::startsWith(auth()->user()->avatar, 'http')
+
+              @auth
+<a href="{{ route('profile') }}" class="nav-avatar">
+    <img
+        src="{{ auth()->user()->avatar
+            ? (Str::startsWith(auth()->user()->avatar, 'http')
                 ? auth()->user()->avatar
-                : asset('storage/' . auth()->user()->avatar) }}"
-            class="user-icon"
-            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
-        >
-    </a>
+                : asset('storage/' . auth()->user()->avatar))
+            : asset('images/default-avatar.png') }}"
+        alt="Profile"
+    >
+</a>
 @endauth
 
         @guest
@@ -201,19 +203,19 @@
 </section>
 
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-left">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo">
-        <div>
-            <strong>Lasica Trip Adventure</strong><br>
-            Bogor, Jawa Barat, ID
+<!-- Footer -->
+    <footer>
+        <div class="footer-left">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+            <div>
+                <strong>Lasica Trip Adventure</strong><br>
+                Bogor, Jawa Barat, ID
+            </div>
         </div>
-    </div>
-    <div class="footer-right">
-        🔗 Instagram | 🎵 TikTok | 💬 WhatsApp
-    </div>
-</footer>
+        <div class="footer-right">
+            🔗 Instagram | 🎵 TikTok | 💬 WhatsApp
+        </div>
+    </footer>
 
 </body>
 </html>

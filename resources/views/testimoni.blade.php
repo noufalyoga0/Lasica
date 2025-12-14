@@ -107,16 +107,17 @@
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
 
-        @auth
-    <a href="{{ route('profile') }}">
-        <img
-            src="{{ Str::startsWith(auth()->user()->avatar, 'http')
+      @auth
+<a href="{{ route('profile') }}" class="nav-avatar">
+    <img
+        src="{{ auth()->user()->avatar
+            ? (Str::startsWith(auth()->user()->avatar, 'http')
                 ? auth()->user()->avatar
-                : asset('storage/' . auth()->user()->avatar) }}"
-            class="user-icon"
-            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
-        >
-    </a>
+                : asset('storage/' . auth()->user()->avatar))
+            : asset('images/default-avatar.png') }}"
+        alt="Profile"
+    >
+</a>
 @endauth
 
         @guest

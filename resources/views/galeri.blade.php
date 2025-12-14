@@ -8,46 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .gallery-container {
-            width: 90%;
-            margin: auto;
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .gallery-text {
-            max-width: 800px;
-            margin: 0 auto 40px auto;
-            font-size: 15px;
-            color: #444;
-            line-height: 1.6;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-            transition: transform .3s;
-        }
-
-        .gallery-item img:hover {
-            transform: scale(1.03);
-        }
-    </style>
 
 </head>
 <body>
@@ -68,16 +28,17 @@
 
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
 
-        @auth
-    <a href="{{ route('profile') }}">
-        <img
-            src="{{ Str::startsWith(auth()->user()->avatar, 'http')
+          @auth
+<a href="{{ route('profile') }}" class="nav-avatar">
+    <img
+        src="{{ auth()->user()->avatar
+            ? (Str::startsWith(auth()->user()->avatar, 'http')
                 ? auth()->user()->avatar
-                : asset('storage/' . auth()->user()->avatar) }}"
-            class="user-icon"
-            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
-        >
-    </a>
+                : asset('storage/' . auth()->user()->avatar))
+            : asset('images/default-avatar.png') }}"
+        alt="Profile"
+    >
+</a>
 @endauth
 
         @guest
@@ -104,56 +65,44 @@
     <!-- Grid Foto -->
     <div class="gallery-grid">
 
-        @for ($i = 1; $i <= 1; $i++)
-            <div class="gallery-item">
-                <img src="{{ asset('images/merbabu.png') }}" alt="Foto Galeri">
-            </div>
+    @forelse ($galeris as $galeri)
+    <div class="gallery-item">
+        <img
+            src="{{ asset('storage/' . $galeri->image) }}"
+            alt="{{ $galeri->title ?? 'Foto Galeri' }}"
+        >
 
-            <div class="gallery-item">
-                <img src="{{ asset('images/lawu.png') }}" alt="Foto Galeri">
-            </div>
+        <h4 style="margin-top:10px;">
+            {{ $galeri->title }}
+        </h4>
 
-            <div class="gallery-item">
-                <img src="{{ asset('images/sumbing.jpg') }}" alt="Foto Galeri">
-            </div>
-
-            <div class="gallery-item">
-                <img src="{{ asset('images/sindoro2.png') }}" alt="Foto Galeri">
-            </div>
-
-            <div class="gallery-item">
-                <img src="{{ asset('images/sumbing.jpg') }}" alt="Foto Galeri">
-            </div>
-
-            <div class="gallery-item">
-                <img src="{{ asset('images/gallery1.png') }}" alt="Foto Galeri">
-            </div>
-
-            <div class="gallery-item">
-                <img src="{{ asset('images/gallery2.png') }}" alt="Foto Galeri">
-            </div>
-
-            <div class="gallery-item">
-                <img src="{{ asset('images/gallery3.png') }}" alt="Foto Galeri">
-            </div>
-        @endfor
-
+        <p style="font-size:14px;color:#555;">
+            {{ $galeri->description }}
+        </p>
     </div>
+@empty
+
+        <p style="grid-column: 1 / -1; text-align:center;">
+            Belum ada foto di galeri.
+        </p>
+    @endforelse
+
+</div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-left">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo">
-        <div>
-            <strong>Lasica Trip Adventure</strong><br>
-            Bogor, Jawa Barat, ID
+<!-- Footer -->
+    <footer>
+        <div class="footer-left">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+            <div>
+                <strong>Lasica Trip Adventure</strong><br>
+                Bogor, Jawa Barat, ID
+            </div>
         </div>
-    </div>
-    <div class="footer-right">
-        🔗 Instagram | 🎵 TikTok | 💬 WhatsApp
-    </div>
-</footer>
+        <div class="footer-right">
+            🔗 Instagram | 🎵 TikTok | 💬 WhatsApp
+        </div>
+    </footer>
 
 </body>
 </html>

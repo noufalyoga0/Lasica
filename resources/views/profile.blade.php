@@ -10,25 +10,28 @@
 {{-- ================= NAVBAR ================= --}}
 <nav>
     <div class="nav-logo">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Lasica Logo">
     </div>
 
     <ul class="nav-links">
-        <a href="{{ route('home') }}"class="active">Home</a>
-        <a href="{{ route('trip') }}"class="active">Trip</a>
-        <a href="{{ route('galeri') }}"class="active">Galeri</a>
-        <a href="{{ route('testimoni') }}" class="active">Testimoni</a>
-        <a href="{{ route('aboutus') }}"class="active">About us</a>
+        <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('trip') }}">Trip</a>
+        <a href="{{ route('galeri') }}">Galeri</a>
+        <a href="{{ route('testimoni') }}">Testimoni</a>
+        <a href="{{ route('aboutus') }}">About Us</a>
     </ul>
 
     <div class="nav-actions">
-        <img src="{{ auth()->user()->avatar
-            ? asset('storage/' . auth()->user()->avatar)
-            : asset('images/user.png') }}"
-            class="user-icon"
-            style="width:36px;height:36px;border-radius:50%">
+        <a href="{{ route('profile') }}" class="nav-avatar">
+            <img
+                src="{{ auth()->user()->avatar
+                    ? asset('storage/' . auth()->user()->avatar)
+                    : asset('images/default-avatar.png') }}"
+                alt="Profile">
+        </a>
     </div>
 </nav>
+
 
 {{-- ================= GREETING ================= --}}
 <div class="profile-greeting">

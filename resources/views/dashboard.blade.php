@@ -26,10 +26,16 @@
 @endguest
 
 @auth
-    <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-        @csrf
-        <button type="submit" class="login-btn">Logout</button>
-    </form>
+    <a href="{{ route('profile') }}">
+        <img
+            src="{{ auth()->user()->avatar
+                ? (Str::startsWith(auth()->user()->avatar, 'http')
+                    ? auth()->user()->avatar
+                    : asset('storage/' . auth()->user()->avatar))
+                : asset('images/default-avatar.png') }}"
+            style="width:35px;height:35px;border-radius:50%;object-fit:cover;"
+        >
+    </a>
 @endauth
     </nav>
 
@@ -43,81 +49,89 @@
 
     <!-- Trip Section -->
     <section class="trips">
-        <h2>Trip Yang Tersedia</h2>
-        <div class="trip-list">
+    <h2>Trip Yang Tersedia</h2>
 
-            <div class="trip-card">
-                <img src="{{ asset('images/sindoro.png') }}" alt="Gunung Sindoro">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Oct 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Sindoro 2D1N</h3>
-                    <p>⭐ 5 (1022 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 1rb x dipesan</p>
-                    <p>👁️ 2rb x dilihat</p>
-                    <p class="price">Rp 600.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
+    <div class="trip-list">
+        @foreach($trips as $trip)
+        <div class="trip-card">
+
+            <img src="{{ asset('storage/' . $trip->image) }}" alt="{{ $trip->nama_trip }}">
+
+            <span class="label">Open Trip</span>
+
+            <div class="info">
+                <div class="date-badge">
+                    📅 {{ \Carbon\Carbon::parse($trip->tanggal)->translatedFormat('d M Y') }}
                 </div>
+
+                <div class="duration-badge">
+                    ⏱️ {{ $trip->durasi_hari }} Hari
+                </div>
+
+                <h3>{{ $trip->nama_trip }}</h3>
+
+                <p>⭐ {{ number_format($trip->rating, 1) }} ({{ number_format($trip->total_ulasan) }} Ulasan)</p>
+                <p>📍 {{ $trip->lokasi }}</p>
+                <p>🔥 {{ number_format($trip->total_dipesan) }}x dipesan</p>
+                <p>👁️ {{ number_format($trip->views) }}x dilihat</p>
+
+                <p class="price">
+                    Rp {{ number_format($trip->harga, 0, ',', '.') }}
+                </p>
+
+                <a href="{{ route('trip.detail', $trip->id) }}" class="btn-detail">
+                    Detail >
+                </a>
             </div>
 
-            <div class="trip-card">
-                <img src="{{ asset('images/lawu.png') }}" alt="Gunung Lawu">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Oct 2025</div>
-                    <div class="duration-badge">⏱️ 1 Hari</div>
-                    <h3>Tektok Gunung Lawu</h3>
-                    <p>⭐ 5 (2100 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 2rb x dipesan</p>
-                    <p>👁️ 4rb x dilihat</p>
-                    <p class="price">Rp 250.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
-                </div>
-            </div>
         </div>
-    </section>
+        @endforeach
+    </div>
+</section>
+
 
     <!-- Sering Dipesan -->
     <section class="trips">
-        <h2>Sering Dipesan</h2>
-        <div class="trip-list">
+    <h2>Sering Dipesan</h2>
 
-            <div class="trip-card">
-                <img src="{{ asset('images/merbabu.png') }}" alt="Gunung Merbabu">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Oct 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Merbabu</h3>
-                    <p>⭐ 5 (5341 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 5rb x dipesan</p>
-                    <p>👁️ 7rb x dilihat</p>
-                    <p class="price">Rp 600.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
+    <div class="trip-list">
+        @foreach($seringDipesan as $trip)
+        <div class="trip-card">
+
+            <img src="{{ asset('storage/' . $trip->image) }}" alt="{{ $trip->nama_trip }}">
+
+            <span class="label">Open Trip</span>
+
+            <div class="info">
+                <div class="date-badge">
+                    📅 {{ \Carbon\Carbon::parse($trip->tanggal)->translatedFormat('d M Y') }}
                 </div>
+
+                <div class="duration-badge">
+                    ⏱️ {{ $trip->durasi_hari }} Hari
+                </div>
+
+                <h3>{{ $trip->nama_trip }}</h3>
+
+                <p>⭐ {{ number_format($trip->rating, 1) }} ({{ number_format($trip->total_ulasan) }} Ulasan)</p>
+                <p>📍 {{ $trip->lokasi }}</p>
+                <p>🔥 {{ number_format($trip->total_dipesan) }}x dipesan</p>
+                <p>👁️ {{ number_format($trip->views) }}x dilihat</p>
+
+                <p class="price">
+                    Rp {{ number_format($trip->harga, 0, ',', '.') }}
+                </p>
+
+                <a href="{{ route('trip.detail', $trip->id) }}" class="btn-detail">
+                    Detail >
+                </a>
             </div>
 
-            <div class="trip-card">
-                <img src="{{ asset('images/sindoro2.png') }}" alt="Gunung Sindoro">
-                <span class="label">Open Trip</span>
-                <div class="info">
-                    <div class="date-badge">📅 7 Oct 2025</div>
-                    <div class="duration-badge">⏱️ 2 Hari</div>
-                    <h3>Gunung Sindoro 2D1N</h3>
-                    <p>⭐ 5 (1022 Ulasan)</p>
-                    <p>📍 Jawa Tengah</p>
-                    <p>🔥 1rb x dipesan</p>
-                    <p>👁️ 2rb x dilihat</p>
-                    <p class="price">Rp 600.000</p>
-                    <a href="#" class="btn-detail">Detail ></a>
-                </div>
-            </div>
         </div>
-    </section>
+        @endforeach
+    </div>
+</section>
+
 
     <!-- Review Section -->
     <section class="review">

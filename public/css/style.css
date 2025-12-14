@@ -486,16 +486,16 @@ input:focus {
 }
 
 .trip-filter {
-    width: 350px;              /* Tidak lagi full width */
-    margin: 20px auto 40px;    /* Tengah + jarak ideal */
+    width: 350px;              
+    margin: 20px auto 40px;    
     background: white;
     border: 2px solid #dcdcdc;
-    padding: 8px 0;            /* Kurangi tinggi */
+    padding: 8px 0;            
     border-radius: 12px;
     
     display: flex;
     justify-content: center;
-    align-items: center;       /* Biar tombol pas di tengah */
+    align-items: center;       
     gap: 10px;
 }
 
@@ -541,7 +541,7 @@ input:focus {
             height: 360px;
             object-fit: cover;
             border-radius: 15px;
-            border: 4px solid #00bfff;
+            border: 4px 
         }
 
         .side-images {
@@ -900,6 +900,7 @@ input:focus {
     background: #c0392b;
 }
 
+<<<<<<< HEAD
 
 /* === TRIP PAGE === */
 .trip-page {
@@ -949,3 +950,414 @@ input:focus {
 }
 
 
+=======
+/* TAB */
+.trip-filter {
+    width: fit-content;          /* kotak ikut isi */
+    margin: 30px auto 40px;      /* TENGAH */
+    background: white;
+    border: 2px solid #dcdcdc;
+    padding: 6px;
+    border-radius: 14px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.tab {
+    padding: 10px 30px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+}
+.tab:first-child { border-radius: 12px 0 0 12px; }
+.tab:last-child { border-radius: 0 12px 12px 0; }
+.tab.active {
+    background: #00bcd4;
+    color: #fff;
+}
+
+/* === SAMAKAN PRIVATE TRIP DENGAN OPEN TRIP === */
+.private-card {
+    width: 540px;                 /* sama kayak .trip-card */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    border-radius: 16px;
+    padding: 18px;
+    margin: 0;
+
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* gambar */
+.private-card .card-image {
+    width: 230px;
+}
+
+.private-card .card-image img {
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* content */
+.private-card .card-content {
+    width: auto;
+    flex: 1;
+    padding-left: 20px;
+}
+
+
+/* CONTENT */
+.card-content {
+    width: 62%;
+    padding-left: 20px;
+}
+
+.pill-group {
+    display: flex;
+    gap: 10px;
+}
+.pill {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+.date { background: #e3f2fd; }
+.durasi { background: #e8fff5; }
+
+.paket {
+    font-weight: 600;
+    margin-top: -5px;
+}
+
+.lokasi {
+    margin: 8px 0;
+}
+
+.desc {
+    font-size: 14px;
+    color: #555;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.harga {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.btn-wa {
+    background: #00c853;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .gallery-container {
+            width: 90%;
+            margin: auto;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .gallery-text {
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            transition: transform .3s;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.03);
+        }
+
+        /* ===== GALLERY ===== */
+.gallery {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.gallery h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* GRID UTAMA */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+    gap: 25px;
+    max-width: 1100px;   /* biar tengah */
+    margin: 0 auto;      /* CENTER */
+}
+
+/* ITEM GALERI */
+.gallery-item {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #00b4ff;
+    color: white;
+    padding: 25px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-left img {
+    width: 55px;
+}
+
+.footer-right {
+    font-size: 14px;
+}
+
+/* ================== ULASAN ================== */
+.ulasan {
+    padding: 60px 8%;
+}
+
+.ulasan h2 {
+    margin-bottom: 30px;
+}
+
+.ulasan-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.ulasan-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.ulasan-card img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.rating span {
+    color: #ddd;
+    font-size: 18px;
+}
+
+.rating .star-active {
+    color: #f5b301;
+}
+
+.ulasan-card small {
+    display: block;
+    color: #777;
+    margin: 6px 0;
+}
+
+.see-more {
+    margin-top: 25px;
+    text-align: right;
+}
+
+.btn-see-more {
+    text-decoration: none;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Avatar Navbar */
+.nav-avatar img {
+    width: 45px;        /* ubah sesuai kebutuhan */
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.nav-avatar img {
+    transition: 0.2s ease;
+}
+
+.nav-avatar img:hover {
+    transform: scale(1.1);
+}
+
+/* ========================= */
+/* === ORDER FORM PAGE === */
+/* ========================= */
+
+.order-form {
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.order-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 760px;
+    padding: 35px 45px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.order-container h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #222;
+}
+
+.order-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* FORM */
+.order-container form {
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 2px solid #00b4d8;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0077b6;
+}
+
+/* ROW (2 KOLOM) */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* BUTTON */
+.form-action {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.btn-pay {
+    background: #00b4ff;
+    color: white;
+    padding: 14px 60px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.btn-pay:hover {
+    background: #009ace;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+/* READONLY INPUT */
+.form-group input[readonly] {
+    background: #f1faff;
+    cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .order-container {
+        padding: 30px 25px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-pay {
+        width: 100%;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+>>>>>>> ef0784a (DONE SEMUA, TINGGAL DASHBOARD ADMIN)

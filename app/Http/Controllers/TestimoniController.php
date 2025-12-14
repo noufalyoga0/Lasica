@@ -9,8 +9,11 @@ class TestimoniController extends Controller
 {
     public function index()
     {
-        $reviews = Review::with('user')->latest()->get();
-        return view('testimoni', compact('reviews'));
+        $reviews = Review::with('user')
+        ->latest()
+        ->paginate(6); // atau bebas: 4, 8, 10
+
+    return view('testimoni', compact('reviews'));
     }
 
     public function create()
