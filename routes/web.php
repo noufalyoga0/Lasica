@@ -4,6 +4,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\AdminAccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,9 +79,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('admin-transactions');
     })->name('admin-transactions');
 
-    Route::get('/admin-accounts', function () {
-        return view('admin-accounts');
-    })->name('admin-accounts');
+    Route::get('/admin-accounts', [AdminAccountController::class, 'index'])->name('admin-accounts');
 
     Route::get('/admin-settings', function () {
         return view('admin-settings');

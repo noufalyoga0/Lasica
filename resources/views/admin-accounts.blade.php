@@ -29,7 +29,6 @@
         <!-- NAVBAR -->
         <header class="bg-white shadow px-6 py-6 flex justify-between items-center">
             <h2 class="text-lg font-semibold">Accounts</h2>
-            <input type="text" placeholder="Search user..." class="border rounded-lg px-3 py-1 text-sm">
         </header>
 
         <!-- CONTENT -->
@@ -38,7 +37,7 @@
             <!-- SUMMARY -->
             <div class="bg-white p-6 rounded-xl shadow">
                 <p class="text-sm text-gray-500">Total User Terdaftar</p>
-                <h3 class="text-3xl font-bold">128 User</h3>
+                <h3 class="text-3xl font-bold">{{ $totalUser }} User</h3>
             </div>
 
             <!-- TABLE -->
@@ -56,28 +55,22 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y">
+                        @foreach ($users as $user)
                         <tr>
-                            <td class="py-3">Anisa Rahmawati</td>
-                            <td>anisa@email.com</td>
-                            <td>User</td>
-                            <td>10 Jan 2025</td>
-                            <td class="text-green-600">Aktif</td>
+                            <td class="py-3">{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ ucfirst($user->role ?? 'User') }}</td>
+                            <td>{{ $user->created_at->format('d M Y') }}</td>
+
+                            <td class="
+                                {{ ($user->status ?? 'aktif') === 'aktif' ? 'text-green-600' : 'text-red-600' }}
+                            ">
+                                {{ ucfirst($user->status ?? 'Aktif') }}
+                            </td>
                         </tr>
-                        <tr>
-                            <td class="py-3">Budi Santoso</td>
-                            <td>budi@email.com</td>
-                            <td>User</td>
-                            <td>12 Jan 2025</td>
-                            <td class="text-green-600">Aktif</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3">Admin Lasica</td>
-                            <td>admin@lasicatrip.com</td>
-                            <td>Admin</td>
-                            <td>01 Jan 2025</td>
-                            <td class="text-blue-600">Admin</td>
-                        </tr>
+                        @endforeach
                     </tbody>
+
                 </table>
 
             </div>

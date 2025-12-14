@@ -13,11 +13,11 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <label>Nama lengkap</label>
+            <input type="text" name="name" placeholder="Masukkan Nama" required>
+        
             <label>Email</label>
             <input type="email" name="email" placeholder="Masukkan Email" required>
-
-            <label>Username</label>
-            <input type="text" name="username" placeholder="Masukkan Username" required>
 
             <label>Password</label>
             <input type="password" name="password" placeholder="Masukkan Password" required>
