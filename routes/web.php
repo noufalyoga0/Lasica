@@ -4,16 +4,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimoniController;
-<<<<<<< HEAD
 use App\Http\Controllers\AdminAccountController;
-=======
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\TripController as AdminTripController;
-use App\Http\Controllers\OrderController;
->>>>>>> ef0784a (DONE SEMUA, TINGGAL DASHBOARD ADMIN)
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
@@ -61,7 +52,6 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-<<<<<<< HEAD
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
 
     Route::get('/aboutus', function () {
@@ -95,10 +85,6 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/createtrip-admin', function () {
     return view('/createtrip-admin');
     })->name('createtrip-admin');
-=======
-     Route::get('/order/create/{trip}', [OrderController::class, 'create'])
-    ->name('order.create');
->>>>>>> 3ccae85 (new)
 });
 
     // PEMBAYARAN TRIP
