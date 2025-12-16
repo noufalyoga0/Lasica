@@ -9,11 +9,21 @@ use App\Http\Controllers\AdminAccountController;
 =======
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\TripController as AdminTripController;
 use App\Http\Controllers\OrderController;
 >>>>>>> ef0784a (DONE SEMUA, TINGGAL DASHBOARD ADMIN)
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Models\Order;
+use App\Http\Controllers\Auth\RegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +52,7 @@ Route::get('/aboutus', fn () => view('aboutus'))->name('aboutus');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth:web', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -51,6 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+<<<<<<< HEAD
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
 
     Route::get('/aboutus', function () {
@@ -84,6 +95,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/createtrip-admin', function () {
     return view('/createtrip-admin');
     })->name('createtrip-admin');
+=======
+     Route::get('/order/create/{trip}', [OrderController::class, 'create'])
+    ->name('order.create');
+>>>>>>> 3ccae85 (new)
 });
 
     // PEMBAYARAN TRIP
@@ -91,7 +106,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // ORDER
     Route::post('/order/{trip}', [OrderController::class, 'store'])->name('order.store');
-});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -100,15 +115,125 @@ Route::middleware(['auth', 'verified'])->group(function () {
 */
 
 Route::get('/payment/{order}', [PaymentController::class, 'pay'])
-    ->name('payment.pay')
-    ->middleware('auth');
+    ->middleware('auth:web')
+    ->name('payment.pay');
+
+
 
 // test relasi
 Route::get('/order-test/{order}', function (Order $order) {
     return $order->load('payment');
+});
 
-    Route::post('/payment/update', [PaymentController::class, 'updateStatus']);
-
+Route::post('/payment/update', [PaymentController::class, 'updateStatus']);
 Route::post('/midtrans/callback', [PaymentController::class, 'callback']);
 
-});  
+
+
+/*
+|--------------------------------------------------------------------------
+| AUTH USER
+|--------------------------------------------------------------------------
+*/
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('guest:web')
+    ->name('login');
+
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+    ->middleware('guest:web');
+    
+    Route::get('/register', function () {
+    return view('auth.register');
+})->middleware('guest:web')->name('register');
+
+Route::get('/register', [RegisterController::class, 'create'])
+    ->middleware('guest:web')
+    ->name('register');
+
+Route::post('/register', [RegisterController::class, 'store'])
+    ->middleware('guest:web');
+
+    
+//Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    //->name('logout');
+/*
+|--------------------------------------------------------------------------
+| ADMIN
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('admin')->group(function () {
+
+    // ======================
+    // AUTH ADMIN (PUBLIC)
+    // ======================
+   Route::get('/login', [AuthController::class, 'loginForm'])
+    ->middleware('guest:admin')
+    ->name('admin.login');
+
+Route::post('/login', [AuthController::class, 'login'])
+    ->middleware('guest:admin');
+
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('admin.logout');
+
+    // ======================
+    // ADMIN AREA (PROTECTED)
+    // ======================
+    Route::middleware('auth:admin')->name('admin.')->group(function () {
+
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        Route::get('/users', [UserController::class, 'index'])
+            ->name('users.index');
+
+        Route::get('/payments', [AdminPaymentController::class, 'index'])
+            ->name('payments.index');
+
+        Route::get('/payments/{id}', [AdminPaymentController::class, 'show'])
+            ->name('payments.show');
+
+        Route::put('/payments/{id}/status', [AdminPaymentController::class, 'updateStatus'])
+            ->name('payments.updateStatus');
+
+        Route::get('/orders', [AdminOrderController::class, 'index'])
+            ->name('orders.index');
+
+        Route::get('/orders/{id}', [AdminOrderController::class, 'show'])
+            ->name('orders.show');
+
+        Route::put('/orders/{id}/status', [AdminOrderController::class, 'updateStatus'])
+            ->name('orders.updateStatus');
+
+        Route::get('/trips', [AdminTripController::class, 'index'])
+            ->name('trips.index');
+
+        Route::get('/trips/create', [AdminTripController::class, 'create'])
+            ->name('trips.create');
+
+        Route::post('/trips', [AdminTripController::class, 'store'])
+            ->name('trips.store');
+
+        Route::get('/trips/{trip}/edit', [AdminTripController::class, 'edit'])
+            ->name('trips.edit');
+
+        Route::put('/trips/{trip}', [AdminTripController::class, 'update'])
+            ->name('trips.update');
+
+        Route::delete('/trips/{trip}', [AdminTripController::class, 'destroy'])
+            ->name('trips.destroy');
+
+        
+    });
+});
+
+Route::get('/debug-auth', function () {
+    return [
+        'web' => auth()->check(),
+        'admin' => auth('admin')->check(),
+        'user_id' => auth()->id(),
+        'admin_id' => auth('admin')->id(),
+    ];
+});
